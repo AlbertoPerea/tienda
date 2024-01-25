@@ -37,23 +37,29 @@ public class Productos {
 
     @Column(name = "nombre")
     private String nombre;
-    
+
     @Column(name = "descripcion")
     private String descripcion;
-    
+
     @Column(name = "costo")
     private float costo;
-    
+
     @Column(name = "utilidad")
     private float utilidad;
-    
+
     @Column(name = "cantidad")
     private int cantidad;
-    
+
     @Column(name = "precioUni")
     private float precioUni;
 
-
-    
+    public void update(ProductosDto productDto) {
+        this.nombre = productDto.getNombre();
+        this.descripcion = productDto.getDescripcion();
+        this.costo = productDto.getCosto();
+        this.utilidad = productDto.getUtilidad();
+        this.cantidad = productDto.getCantidad();
+        this.precioUni = productDto.getPrecioUni();
+    }
 
 }
