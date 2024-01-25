@@ -4,6 +4,7 @@
  */
 package com.laboratorio.tienda.models;
 
+import jakarta.persistence.Column;
 import lombok.*;
 
 @Getter
@@ -13,10 +14,13 @@ import lombok.*;
 @Builder
 @ToString
 public class ProductosDto {
-	
-	private String name;
-	private String country;
-	private String description;
-	private Boolean visible;
+
+
+	private String nombre;
+	private String descripcion;
+	private float costo;
+	private float utilidad;
+	private int cantidad;
+	private float precioUni;
 
 }
