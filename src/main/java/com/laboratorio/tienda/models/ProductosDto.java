@@ -14,13 +14,13 @@ import lombok.*;
 @Builder
 @ToString
 public class ProductosDto {
-	
 
-    private String nombre;
-    private String descripcion;
-    private float costo;
-    private float utilidad;
-    private int cantidad;
-    private float precioUni;
+
+	private String nombre;
+	private String descripcion;
+	private float costo;
+	private float utilidad;
+	private int cantidad;
+	private float precioUni;
 
 }
