@@ -1,16 +1,51 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.laboratorio.tienda.repositorys;
 
-import com.laboratorio.tienda.models.Productos;
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
-/**
- *
- * @author cdpos
- */
-public interface ProductosRepository extends JpaRepository<Productos,Long> {
-    
+import com.laboratorio.tienda.models.Productos;
+import com.laboratorio.tienda.repositorys.utils.SearchCriteria;
+import com.laboratorio.tienda.repositorys.utils.SearchOperation;
+import com.laboratorio.tienda.repositorys.utils.SearchStatement;
+import io.micrometer.common.util.StringUtils;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
+@Repository
+@RequiredArgsConstructor
+
+public class ProductosRepository {
+
+
+    private final  ProductosJpaRepository repository;
+    public List<Productos> getProductos(){
+        return repository.findAll();
+    }
+
+    public List<Productos> search(  String nombre, String descripcion, Float costo, Float utilidad, Integer cantidad,
+    Float precioUni) {
+        SearchCriteria<Productos> spec = new SearchCriteria<>();
+        if (StringUtils.isNotBlank(nombre)) {
+            spec.add(new SearchStatement("nombre", nombre, SearchOperation.MATCH));
+        }
+
+        if (StringUtils.isNotBlank(descripcion)) {
+            spec.add(new SearchStatement("descripcion", descripcion, SearchOperation.EQUAL));
+        }
+       /* if (StringUtils.isNotBlank(costo)) {
+            spec.add(new SearchStatement("costo", descripcion, SearchOperation.MATCH));
+        }
+        if (StringUtils.isNotBlank(String.valueOf(utilidad))) {
+            spec.add(new SearchStatement("utilidad", descripcion, SearchOperation.MATCH));
+        }
+        if (StringUtils.isNotBlank(String.valueOf(cantidad))) {
+            spec.add(new SearchStatement("descripcion", descripcion, SearchOperation.EQUAL));
+        }
+        if (StringUtils.isNotBlank(String.valueOf(precioUni))) {
+            spec.add(new SearchStatement("descripcion", descripcion, SearchOperation.MATCH));
+        }*/
+        return repository.findAll(spec);
+    }
+
+
+
+
 }
